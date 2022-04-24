@@ -1,0 +1,81 @@
+<h1>{{title}}</h1>
+
+<div class="checkout2">
+    <h1>Checkout</h1>
+    <p><span style="font-weight: 800;">Address</span>&nbsp; &nbsp; &nbsp;&nbsp;<span style="letter-spacing: -0.22em;">---------</span> &nbsp; &nbsp; &nbsp;&nbsp;<span style="font-weight: 100;">Payment</span></p>
+
+    <div class="checkoutforms">
+        <p>Shipping Information</p>
+        <form id="userInfo">
+        <input type="text" placeholder="First Name" style="width: 45%; height: 40px;float: left; margin-right: 10%; margin-bottom: 5%;" ng-model="fname">
+        <input type="text" placeholder="Last Name" style="width: 45%; height: 40px; float: left;margin-bottom: 5%;" ng-model="lname"><br>
+        <input type="text" placeholder="Address" style="width:100%;height: 40px;margin-bottom: 5%;" ng-model="address">
+        <input type="text" placeholder="Apartment, suite, etc(optional)" style="width:100%;height: 40px;margin-bottom: 5%;" ng-model="optional1">
+        <input type="text" placeholder="Country" style="width:30%; height: 40px; margin-right: 5%; float: left;margin-bottom: 5%;" ng-model="country">
+        <input type="text" placeholder="City" style="width:30%; height: 40px; margin-right: 5%; float: left;margin-bottom: 5%;" ng-model="city">
+        <input type="text" placeholder="Zipcode" style="width:30%; height: 40px; margin-bottom: 5%;" ng-model="zip">
+        <input type="text" placeholder="Optional" style="width:100%;height: 40px;margin-bottom: 5%;" ng-model="optional2">
+        <input type="checkbox" ng-model="contact"> Save contact information
+        <a href="#!payment">
+            <button class="btn bg-blue text-white rounded-0 paybtn" ng-click="saveInfo($event)">Pay</button>
+        </a>
+        </form>
+
+    </div>
+
+</div>
+
+
+
+
+<div class="checkoutCart">
+    <h3>Your cart</h3>
+    <div class="item border-bottom ml-0" ng-repeat="(key, item) in cart">
+        <div class="sidedetail">
+            <div class="discription">
+                <h2>{{item.name}}</h2>
+                <h3>$ {{item.price}}</h3>
+                <p>Quantity: {{item.quantity}}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="totalTable">
+        <table>
+            <tr>
+                <th>
+                    Subtotal
+                </th>
+                <td>
+                    $ {{subTotal();}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Shipping
+                </th>
+                <td>
+                    $ {{shippingFee}}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="total">
+                    Total
+                </th>
+                <td class="total">
+                    $ {{totalPrice();}}
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+
+
+
+
+</div>

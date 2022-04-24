@@ -1,0 +1,24 @@
+<div class="bg-blue text-white p-5 border-top">
+    <h2>Ceramics</h2>
+    <p>
+        Ceramic is a general term for a type of ceramic
+        <br>
+        made by kneading, and firing clay. pottery.
+    </p>
+</div>
+<div class="container mt-5">
+    <div class="row m-auto">
+        <div ng-repeat="(key, item) in itemLists" class="col-12 col-md-4" ng-click="showItemInfo(key)">
+            <div class="card border-0 m-auto" style="width: 18rem; height:100%">
+                <a class="text-dark" href="#!detals">
+                    <img style="height: 12rem" ng-src="{{item.image}}" class="card-img-top" alt="...">
+                    <div class="card-body">
+                        <h5 class="card-title" ng-bind="item.name"></h5>
+                        <p class="card-text" ng-bind="item.price | currency"></p>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

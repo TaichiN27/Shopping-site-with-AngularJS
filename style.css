@@ -1,0 +1,147 @@
+/* 
+Color code
+blue:#0E3C7F
+gold:#CAA846
+gray:#EFF2F6
+*/
+
+/*test*/
+.text-blue{
+    color: #0E3C7F;
+}
+.bg-blue{
+    background-color: #0E3C7F;
+}
+.text-gold{
+    color: #CAA846;
+}
+.bg-gold{
+    background-color: #CAA846;
+}
+.text-gray{
+    color: #EFF2F6;
+}
+.bg-gray{
+    background-color: #EFF2F6;
+}
+.img-thumbnail {
+    margin: 60px 150px 0px 200px;
+    width: 30%;
+    height: 20%;
+    float: left;
+
+}
+
+.txt {
+    margin-top: 60px;
+}
+
+.quantity{
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+         appearance: textfield;
+    width: 200px;
+    height: 50px;
+    font-size: 20px;
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+
+
+
+.cartimg{
+    width: 200px;
+
+}
+
+.sidedetail{
+}
+
+
+
+.discription h2 {
+    margin-top: 20px;
+}
+
+
+
+.item {
+    margin: 50px 60px 50px 100px;
+}
+
+.image{
+
+}
+
+
+
+.ordersummary {
+    float: left;
+    margin-top: 50px;
+
+}
+
+.eachprice table{
+    width: 100%;
+}
+
+
+
+.total{
+    padding-top: 50px;
+    border-top: 5px solid black;
+}
+
+.buttons{
+    margin-top: 60px;
+}
+
+.checkouts1, .checkouts2{
+    width: 100%;
+} 
+
+.checkout2{
+    width: 40%;
+    margin: 50px 200px 40px 100px;
+    float: left;
+}
+
+.history{
+    margin-top: 70px;
+
+}
+
+.checkoutforms{
+    width: 90%;
+}
+
+
+
+.paybtn {
+    margin-top: 100px;
+    width: 200px;
+    height: 50px;
+    margin-left: 25%;
+    margin-bottom: 100px;
+}
+
+.checkoutCart{
+    float:left;
+    margin-top: 50px;
+    width: 30%;
+
+}
+
+.checkoutCart hr{
+    width: 100%;
+}
+
+
+
+.totalTable table{
+    margin-top: 100px;
+    width: 100%;
+}
+
+

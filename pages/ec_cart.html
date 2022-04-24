@@ -1,0 +1,76 @@
+<div class="container">
+    <div class="row mt-5">
+        <div class="col-12 col-md-6">
+            <div ng-show="isNoItem" class="my-5">
+                <h1> No Item in cart...</h1>
+            </div>
+            <div class="border-bottom" ng-repeat="(key, item) in cart">
+                <div class="image">
+                    <img class="w-75" ng-src="{{item.image}}" alt="{{item.name}}">
+                </div>
+                <div class="sidedetail">
+                    <div class="discription">
+                        <h2>{{item.name}}</h2>
+                        <h3>$ {{item.price}}</h3>
+                        <p>Quantity: {{item.quantity}}</p>
+                    </div>
+                    <div class="button mb-3">
+                        <span class="btn p-0 m-0 cursor-pointer"
+                            ng-click="removeFromCart(item.id);"><u>Remove</u></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-12 col-md-6">
+            <div>
+                <div ng-show="!isNoItem">
+                    <h3>Order Summary</h3>
+                    <br>
+                    <div class="eachprice">
+                        <table>
+                            <tr>
+                                <th>
+                                    Subtotal
+                                </th>
+                                <td>
+                                    $ {{subTotal();}}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th>
+                                    Shipping
+                                </th>
+                                <td>
+                                    $ {{shippingFee}}
+                                </td>
+                            </tr>
+
+                            <tr>
+                                <th class="total">
+                                    Total
+                                </th>
+                                <td class="total">
+                                    $ {{totalPrice();}}
+                                </td>
+                            </tr>
+
+                        </table>
+                    </div>
+                </div>
+                <div class="buttons">
+                    <div ng-show="!isNoItem" class="checkout mb-5">
+                        <a href="#!checkout">
+                            <button class="btn bg-blue text-white rounded-0 checkouts1">Continue to checkout</button>
+                        </a>
+                    </div>
+                    <div class="history m-0">
+                        <a href="#!payment_history">
+                            <button class="btn bg-gold text-white rounded-0 checkouts2">Check payment
+                                history</button>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

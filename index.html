@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Japanese Ceramics</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.4.1/dist/css/bootstrap.min.css"
+        integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="icon" href="./img/common/favicon.ico">
+</head>
+
+<body ng-app="japanese_ceramics_app">
+    <nav class="d-flex align-items-center w-100">
+        <ul class="bg-blue list-unstyled d-flex align-items-center p-2 m-0 w-100">
+            <li class="py-2 px-4">
+                <h3 class="m-0"><a class="text-white text-decoration-none" href="#/!">Japanese Ceramics</a></h3>
+            </li>
+            <li class="py-2 px-4"><a class="text-white text-decoration-none" href="#!shop">Shop</a></li>
+            <li class="py-2 mx-5 ml-auto"><a class="text-decoration-none text-white" href="#!cart"><i
+                        class="bi-bag mx-2"></i>Cart</a></li>
+        </ul>
+    </nav>
+    <main ng-view>
+    </main>
+
+</body>
+<script>
+    let japanese_ceramics_app = angular.module('japanese_ceramics_app', ['ngRoute']);
+
+    japanese_ceramics_app.config(function ($routeProvider) {
+        $routeProvider
+            .when("/", { templateUrl: "./pages/ec_top.html", controller: "ec_top_ctrl" })
+            .when("/shop", { templateUrl: "./pages/ec_shop.html", controller: "ec_shop_ctrl" })
+            .when("/detals", { templateUrl: "./pages/ec_details.html", controller: "ec_details_ctrl" })
+            .when("/cart", { templateUrl: "./pages/ec_cart.html", controller: "ec_cart_ctrl" })
+            .when("/payment_history", { templateUrl: "./pages/ec_payment_history.html", controller: "ec_payment_history_ctrl" })
+            .when("/checkout", { templateUrl: "./pages/ec_checkout.html", controller: "ec_checkout_ctrl" })
+            .when("/payment", { templateUrl: "./pages/ec_payment.html", controller: "ec_payment_ctrl" })
+            .when("/thankyou", { templateUrl: "./pages/ec_thankyou.html", controller: "ec_thankyou_ctrl" })
+            .otherwise({ templateUrl: "./pages/404.html" });
+    });
+
+    japanese_ceramics_app.run(function ($rootScope) {
+        //Products data
+        $rootScope.items = new Map();
+        $rootScope.items.set(3, { id: 3, name: "Tanba Yaki", price: 90, quantity: 0, image: './img/products/tanbayaki.jpg', discription: "Tamba-yaki is said to have originated in the late Heian period (794-1192) or early Kamakura period (1192-1333). Anagama kilns were used until the Momoyama period (1573-1600), after which climbing kilns were introduced, and at the same time, the technique of kick rokuro (left-handed turning rokuro, which is rare in Japan) was introduced, and this traditional technique has been handed down to the present." });
+        $rootScope.items.set(5, { id: 5, name: "Tokoname Yaki", price: 100, quantity: 0, image: './img/products/tokonameyaki.jpeg', discription: "Tokoname ware is stoneware produced in Tokoname City, Aichi Prefecture, and the surrounding area in the Chita Peninsula. It is one of the six oldest kilns in Japan. On April 29, 2017, Tokoname ware was recognized as one of the Six Old Kilns of Japan along with Seto ware, Echizen ware, Tanba Tachikake ware, Bizen ware, and Shigaraki ware." });
+        $rootScope.items.set(8, { id: 8, name: "Shigaraki Yaki", price: 80, quantity: 0, image: './img/products/shigarakiyaki.jpeg', discription: "Shigaraki-yaki is a ceramic ware produced in the Shigaraki Town area of Koka City, Shiga Prefecture. The potter's clay is kneaded with clay and other ingredients such as kibushi, mizuchi, and garome, which gives the pottery its firmness and allows for the production of thicker and larger pieces of pottery." });
+        $rootScope.items.set(9, { id: 9, name: "Seto Yaki", price: 85, quantity: 0, image: './img/products/setoyaki.jpeg', discription: "The birthplace is located at the foot of Mt. Sanage in the southeastern part of Seto City. In the first half of the 9th century, new ash-glazed ceramics using plant ashes as glaze began to be fired at the Sanage kiln." });
+        $rootScope.items.set(11, { id: 11, name: "Bizen Yaki", price: 80, quantity: 0, image: './img/products/bizenyaki.jpeg', discription: "Bizen Pottery is made in Bizen City, Okayama Prefecture. Each piece is molded from high-quality clay, dried, and fired without being painted or glazed, thus revealing the rich earthy flavor of the clay." });
+        $rootScope.items.set(12, { id: 12, name: "Koimari Yaki", price: 150, quantity: 0, image: './img/products/koimari.jpeg', discription: "Imariyaki refers to porcelain made in Hizen Province, which is now Saga and Nagasaki Prefectures.Arita-yaki, Mikawachi-yaki, Hasami-yaki, etc. are also included in Imari-yaki, and they are collectively called Imari because the port of Imari was used to transport porcelain." });
+
+        //Cart
+        $rootScope.cart = {};
+
+        //calculate subtotal
+        $rootScope.subTotal = () => {
+            let subTotalResult = 0;
+            for (key in $rootScope.cart) {
+                subTotalResult += $rootScope.cart[key].price * $rootScope.cart[key].quantity;
+            }
+            return subTotalResult;
+        }
+
+        //Fixed Shipping Fee
+        $rootScope.shippingFee = 100;
+
+        //Calculate total price
+        $rootScope.totalPrice = () => {
+            return $rootScope.subTotal() + $rootScope.shippingFee;
+        }
+    });
+
+    japanese_ceramics_app.controller("ec_top_ctrl", function ($scope, $rootScope) {
+        $scope.title = "Top";
+    });
+
+    japanese_ceramics_app.controller("ec_shop_ctrl", function ($scope, $rootScope) {
+        //Initialize tmp item. For prevent from bug when browser back
+        window.onload = onLoad;
+        function onLoad() {
+            $scope.tmpItem = "";
+        }
+        $scope.itemLists = Object.fromEntries($rootScope.items);
+
+        //Set selected item id
+        $scope.showItemInfo = (key) => {
+            $rootScope.tmpItem = $scope.itemLists[key].id
+        }
+    });
+
+    japanese_ceramics_app.controller("ec_details_ctrl", function ($scope, $rootScope) {
+        $scope.itemData = $rootScope.items.get($rootScope.tmpItem);
+
+        //Initialize the value for input form
+        $scope.quantity = 1;
+
+        //To add item to cart
+        $scope.addToCart = () => {
+            let newItem = { id: $scope.itemData.id, name: $scope.itemData.name, price: $scope.itemData.price, quantity: $scope.quantity, image: $scope.itemData.image, discription: $scope.itemData.discription };
+            $rootScope.cart[newItem.id] = newItem;
+            window.location = "#!cart";
+            $rootScope.isNoItem = false;
+        }
+    });
+
+    japanese_ceramics_app.controller("ec_cart_ctrl", function ($scope, $rootScope) {
+        $scope.title = "Cart";
+        //Check Whether items in cart or not
+        $rootScope.isNoItem = (Object.keys($rootScope.cart).length == 0);
+
+        //Function for remove button
+        $scope.removeFromCart = (itemId) => {
+            delete $rootScope.cart[itemId];
+            $rootScope.isNoItem = (Object.keys($rootScope.cart).length == 0);
+            $rootScope.subTotal();
+        }
+    });
+
+    japanese_ceramics_app.controller("ec_payment_history_ctrl", function ($scope, $rootScope) {
+        $scope.title = "Payment history";
+        let load_data = localStorage.getItem("User1Info");
+        let load_data_obj = JSON.parse(load_data);
+
+        let load_data2 = localStorage.getItem("Payment_history");
+        let load_data_obj2 = JSON.parse(load_data2);
+
+        $scope.load_data_obj = load_data_obj;
+        $scope.load_data_obj2 = load_data_obj2;
+
+        //Check payment if there is history or not
+        if (load_data2 == null) {
+            $scope.hasHistory = false;
+        } else {
+            $scope.hasHistory = true;
+        }
+
+    });
+
+    japanese_ceramics_app.controller("ec_checkout_ctrl", function ($scope, $rootScope) {
+        $scope.saveInfo = ($event) => {
+            if ($scope.fname == null || $scope.lname == null || $scope.address == null || $scope.country == null || $scope.city == null || $scope.zip == null) {
+
+                alert("Fill out everything but optionals")
+                $event.preventDefault()
+
+            } else {
+                let Json_Data = { fname: $scope.fname, lname: $scope.lname, address: $scope.address, optional1: $scope.optional1, country: $scope.country, city: $scope.city, zip: $scope.zip, optional2: $scope.optional2, contact: $scope.contact };
+                let send_data = JSON.stringify(Json_Data);
+                localStorage.setItem("User1Info", send_data);
+            }
+        }
+
+
+    });
+
+    japanese_ceramics_app.controller("ec_payment_ctrl", function ($scope, $rootScope) {
+        $scope.title = "Payment";
+        $scope.savePayInfo = ($event) => {
+            if ($scope.cFname == null || $scope.cLname == null || $scope.CCN == null || $scope.SCN == null) {
+                alert("Please make sure that all forms are filled out correctly.")
+                $event.preventDefault()
+            } else {
+                let date = new Date;
+                let y = date.getFullYear();
+                let m = date.getMonth() + 1;
+                let d = date.getDate();
+                let formattedDate = d + "/" + m + "/" + y;
+                let Payment_history;
+
+                //Read and Create Payment history
+                if (localStorage.getItem("Payment_history") == null) {
+                    Payment_history = [];
+                    Payment_history.push({ total: $rootScope.totalPrice(), paymentDate: formattedDate });
+                } else {
+                    let Payment_history_data = localStorage.getItem("Payment_history");
+                    Payment_history = JSON.parse(Payment_history_data);
+                    Payment_history.push({ total: $rootScope.totalPrice(), paymentDate: formattedDate });
+                }
+                Json_Data = { fname: $scope.cFname, lname: $scope.cLname, CCN: $scope.CCN, SCN: $scope.SCN, DMY: $scope.DMY };
+
+                send_data = JSON.stringify(Json_Data);
+                history_data = JSON.stringify(Payment_history);
+
+                localStorage.setItem("User2Info", send_data);
+                localStorage.setItem("Payment_history", history_data);
+
+                //Initialize cart
+                $rootScope.cart = {};
+            }
+        }
+    });
+
+    japanese_ceramics_app.controller("ec_thankyou_ctrl", function ($scope, $rootScope) {
+        $scope.title = "Thank you for your purchase";
+    });
+
+</script>
+
+</html>

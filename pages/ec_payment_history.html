@@ -1,0 +1,27 @@
+<div class="my-5 text-center text-blue">
+    <h3>Payment history</h3>
+    <div class="my-5 p-4 w-100 m-auto">
+        <div ng-show="!hasHistory" class="w-50 m-auto p-2 d-flex justify-content-center">
+            No payment history...
+        </div>
+        <div ng-repeat="history in load_data_obj2" class="w-50 border-top m-auto p-2 d-flex justify-content-between">
+            <span>
+                {{history.paymentDate}}
+            </span>
+            <span>
+                $ {{history.total}}
+            </span>
+        </div>
+    </div>
+    <a href="#!cart">
+        <button class="btn w-25 bg-blue text-white rounded-0">Return to cart</button>
+    </a>
+    <div class="p-5" ng-show="hasHistory">
+        <h4>Delivery Details</h4>
+        <p>{{load_data_obj.lname}} {{load_data_obj.fname}}</p>
+        <p>Address: {{load_data_obj.zip}} {{load_data_obj.address}}
+            {{load_data_obj.optional1}},{{load_data_obj.optional2}}</p>
+        <p>Country: {{load_data_obj.country}}</p>
+        <p>City: {{load_data_obj.city}}</p>
+    </div>
+</div>

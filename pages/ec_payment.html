@@ -1,0 +1,74 @@
+<div class="checkout2">
+    <h1>Payment</h1>
+    <p><span style="font-weight: 100;">Address</span>&nbsp; &nbsp; &nbsp;&nbsp;<span style="letter-spacing: -0.22em;">---------</span> &nbsp; &nbsp; &nbsp;&nbsp;<span style="font-weight: 800;">Payment</span></p>
+    <p>Payment Information</p>
+    <div class="checkoutforms">
+        <form id="paymentInfo">
+        <input type="text" placeholder="First Name" style="width: 45%; height: 40px;float: left; margin-right: 10%; margin-bottom: 5%;" ng-model="cFname">
+        <input type="text" placeholder="Last Name" style="width: 45%; height: 40px; float: left;margin-bottom: 5%;" ng-model="cLname"><br>
+        <input id="ccn" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}" autocomplete="cc-number" maxlength="19" placeholder="Card Number" style="width:100%;height: 40px;margin-bottom: 5%;" ng-model="CCN">
+        <input id="scn" type="tel" inputmode="numeric" autocomplete="cc-number" maxlength="3" placeholder="Security Code" style="width:30%;height: 40px;margin-bottom: 5%; margin-right: 10%;" ng-model="SCN">
+        <input type="date" name="begin" placeholder="dd-mm-yyyy" min="1997-01-01" max="2030-12-31"style="width:30%;height: 40px;" ng-model="DMY"/>
+        <a href="#!thankyou">
+            <button class="btn bg-blue text-white rounded-0 paybtn" ng-click="savePayInfo($event)">Pay</button>
+        </a>
+        </form>
+        </div>
+
+
+
+
+</div>
+
+
+
+
+<div class="checkoutCart">
+    <h3>Your cart</h3>
+    <div class="item border-bottom ml-0" ng-repeat="(key, item) in cart">
+            <div class="discription">
+                <h2>{{item.name}}</h2>
+                <h3>$ {{item.price}}</h3>
+                <p>Quantity: {{item.quantity}}</p>
+            </div>
+    </div>
+
+    <div class="totalTable">
+        <table>
+            <tr>
+                <th>
+                    Subtotal
+                </th>
+                <td>
+                    $ {{subTotal();}}
+                </td>
+            </tr>
+            <tr>
+                <th>
+                    Shipping
+                </th>
+                <td>
+                    $ {{shippingFee}}
+                </td>
+            </tr>
+
+            <tr>
+                <th class="total">
+                    Total
+                </th>
+                <td class="total">
+                    $ {{totalPrice();}}
+                </td>
+            </tr>
+
+        </table>
+
+    </div>
+
+
+
+
+
+
+
+</div>
